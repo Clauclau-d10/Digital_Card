@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claudio Añasco - Graphic Designer</title>
+  
+  <!-- Font Awesome Icons for Share & Social Buttons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Default Google Fonts (Inter & Oswald for clean typography) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root {
+      --font-name: 'Oswald', sans-serif;
+      --font-position: 'Oswald', sans-serif;
+      --font-description: 'Inter', sans-serif;
+      --font-links: 'Oswald', sans-serif;
+      --font-get-in-touch: 'Oswald', sans-serif;
+
+      /* BACKGROUND SETTINGS */
+      --bg-image-path: url('photo/background.png');
+      /*--bg-overlay-color: rgba(97, 91, 91, 0); /* Darkens background for readability */
+
+      /* PROFILE PHOTO */
+      --profile-photo-size: 200px;
+      --profile-photo-url: url('photo/profile.jpg');
+
+      /* NAME TYPOGRAPHY & SPACING */
+      --name-font-size: 5rem ;
+      --name-color: #ffffff;
+      --name-letter-spacing: 0px;
+      --name-margin-top: 1.2rem;
+      --name-margin-bottom: 0rem;
+
+      /* POSITION TYPOGRAPHY */
+      --position-font-size: 1.5rem;
+      --position-color: #ffffff;
+      --position-margin-bottom: 2rem;
+
+      /*BIO SPACING & SIZES */
+      --description-font-size: 0.95rem;
+      --description-color: #e2e8f0;
+      --description-line-height: 1.4;
+      --paragraph-gap: 0.8rem; /* Gap between paragraphs */
+      --description-max-width: 700px;
+
+      /* SOCIAL LINKS */
+      --link-font-size: 1.1rem;
+      --link-color: #bababa;
+      --link-hover-color: #fefefe;
+      --link-gap: 3rem; /* Gap between link items */
+      --link-margin-top: 2rem;
+
+      /* GET IN TOUCH */
+      --get-in-touch-bg: rgba(236, 235, 235, 0.1); /* Glassmorphism background */
+      --get-in-touch-hover-bg: rgba(183, 183, 183, 0.2);
+      --get-in-touch-text-color: #f6f6f6;
+      --get-in-touch-font-size: 1.35rem;
+      --get-in-touch-padding: 0.8rem 2.8rem;
+      --get-in-touch-border-radius: 50px; /* Fully rounded pill shape */
+
+      /* SHARE BUTTON */
+      --share-btn-bg: rgba(198, 198, 198, 0.1);
+      --share-btn-color: #f6f6f6;
+      --share-btn-size: 50px;
+
+      /* HOVER SHADOW EFFECTS */
+      --black-drop-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+      --button-drop-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      box-sizing: content-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-description);
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      position: relative;
+    }
+
+    /* Background image container with overlay */
+    .bg-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: var(--bg-image-path);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 1;
+    }
+
+    .bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-overlay-color);
+      
+    }
+
+    /* Main Card Content Layout */
+    .card-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1100px;
+      padding: 3rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      min-height: 80vh;
+    }
+
+    /* Left Column (Photo, Name, Title, Bio, Social Links) */
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 700px;
+    }
+
+    
+    /* Circular Profile Photo with Zoom + Shadow Hover Effect */
+    .profile-photo {
+      width: var(--profile-photo-size);
+      height: var(--profile-photo-size);
+      border-radius: 50%;
+      background-image: var(--profile-photo-url);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border: none; /* No border as requested */
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease;
+      cursor: pointer;
+    }
+
+    /* Requested Hover Effect: Slightly zoom with rich black drop shadow */
+    .profile-photo:hover {
+      transform: scale(1.06);
+      box-shadow: var(--black-drop-shadow);
+    }
+
+    /* Customizable Text Elements */
+    .user-name {
+      font-family: var(--font-name);
+      font-size: var(--name-font-size);
+      color: var(--name-color);
+      letter-spacing: var(--name-letter-spacing);
+      margin-top: var(--name-margin-top);
+      margin-bottom: var(--name-margin-bottom);
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .user-position {
+      font-family: var(--font-position);
+      font-size: var(--position-font-size);
+      color: var(--position-color);
+      margin-bottom: var(--position-margin-bottom);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Description / Bio Container */
+    .user-description {
+      font-family: var(--font-description);
+      font-size: var(--description-font-size);
+      color: var(--description-color);
+      line-height: var(--description-line-height);
+      max-width: var(--description-max-width);
+    }
+
+    /* Gap management between paragraphs */
+    .user-description p {
+      margin-bottom: var(--paragraph-gap);
+    }
+
+    .user-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Social Links Section */
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: var(--link-gap);
+      margin-top: var(--link-margin-top);
+    }
+
+    .social-link {
+      font-family: var(--font-links);
+      font-size: var(--link-font-size);
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: color 0.25s ease, transform 0.25s ease;
+      position: relative;
+    }
+
+    .social-link:hover {
+      color: var(--link-hover-color);
+      transform: translateY(-2px);
+    }
+
+    .social-link::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--link-hover-color);
+      transition: width 0.3s ease;
+    }
+
+    .social-link:hover::after {
+      width: 100%;
+    }
+
+    
+    /* Right Column ("Get In Touch" Container) */
+    .right-column {
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 0.5rem;
+    }
+
+    /* Rounded Container Pill Button for "Get in Touch" */
+    .get-in-touch-btn {
+      font-family: var(--font-get-in-touch);
+      font-size: var(--get-in-touch-font-size);
+      color: var(--get-in-touch-text-color);
+      background: var(--get-in-touch-bg);
+      padding: var(--get-in-touch-padding);
+      border-radius: var(--get-in-touch-border-radius);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    /* Requested Hover Effect: Slightly zoom with black drop shadow */
+    .get-in-touch-btn:hover {
+      transform: scale(1.05);
+      background: var(--get-in-touch-hover-bg);
+      box-shadow: var(--button-drop-shadow);
+    }
+
+    /* TOP-RIGHT SHARE BUTTON (Fixed position as required) */
+    .share-btn-fixed {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 10;
+      width: var(--share-btn-size);
+      height: var(--share-btn-size);
+      border-radius: 50%;
+      background: var(--share-btn-bg);
+      color: var(--share-btn-color);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    /* Requested Hover Effect for Share Button */
+    .share-btn-fixed:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.4);
+      box-shadow: var(--button-drop-shadow);
+    }
+
+    
+    /* MODAL POPUPS (Share & Get in Touch) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(7px);
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: rgba(33, 33, 33, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 440px;
+      padding: 2rem;
+      position: relative;
+      transform: translateY(20px) scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-title {
+      font-family: var(--font-name);
+      font-size: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: #d8d8d8;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .modal-close:hover {
+      color: #ffffff;
+    }
+
+    /* Social Share Grid inside Popup */
+    .share-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .share-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: #e4e4e7;
+      text-decoration: none;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .share-item:hover {
+      transform: translateY(-3px);
+      color: #ffffff;
+    }
+
+    .share-icon-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.4rem;
+      color: #ffffff;
+      transition: opacity 0.2s ease;
+    }
+
+    /* Brand Colors for Icons */
+    .messenger-bg { background: #676767; }
+    .instagram-bg { background: #676767; }
+    .linkedin-bg { background: #676767; }
+    .email-bg { background: #676767; }
+
+    /* Copy Link Input Bar */
+    .copy-link-bar {
+      display: flex;
+      align-items: center;
+      background: #27272a;
+      border-radius: 10px;
+      padding: 0.4rem 0.4rem 0.4rem 1rem;
+      border: 1px solid #3f3f46;
+    }
+
+    .copy-link-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #d4d4d8;
+      font-size: 0.88rem;
+      width: 100%;
+    }
+
+    .copy-btn {
+      background: #cdcdcd;
+      color: #1d1d1d;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+      background: #5d6e92;
+    }
+
+    /* Toast Notification for Copying Link */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #c2cedc;
+      color: #141414;
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 200;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Contact Options inside "Get in Touch" Modal */
+    .contact-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.2rem;
+      background: #282828;
+      border-radius: 12px;
+      color: #dcdada;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s ease, transform 0.2s ease;
+      border: 1px solid #3f3f46;
+    }
+
+    .contact-item:hover {
+      background: #737379;
+      transform: translateX(4px);
+    }
+
+    .contact-item i {
+      font-size: 1.2rem;
+      color: #d2d2d2;
+      width: 24px;
+      text-align: center;
+    }
+
+    
+    /* ==========================================================================
+       RESPONSIVE DESIGN (MOBILE CENTERED)
+       On mobile (< 768px): All main elements (photo, name, title, bio, buttons)
+       will center align seamlessly. The Share button stays pinned at top right.
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .card-wrapper {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding-top: 5rem; /* Room for fixed share button */
+        padding-bottom: 3rem;
+        min-height: auto;
+      }
+
+      .left-column {
+        align-items: center;
+        width: 100%;
+      }
+
+      .right-column {
+        margin-top: 2.5rem;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .user-description {
+        max-width: 100%;
+      }
+
+      .social-links {
+        justify-content: center;
+        width: 100%;
+      }
+
+      /* Keep share button pinned at upper right corner on mobile */
+      .share-btn-fixed {
+        top: 1.2rem;
+        right: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background image container with overlay -->
+  <div class="bg-container">
+    <div class="bg-overlay"></div>
+  </div>
+
+  <!-- FIXED TOP-RIGHT SHARE BUTTON -->
+  <!-- Requested: Stays in the upper right corner even on mobile -->
+  <button class="share-btn-fixed" id="shareBtn" aria-label="Share Business Card">
+    <i class="fa-solid fa-share-nodes"></i>
+  </button>
+
+  <!-- MAIN BUSINESS CARD WRAPPER -->
+  <main class="card-wrapper">
+    
+    <!-- LEFT SECTION: Avatar, Name, Position, Bio, Social Links -->
+    <div class="left-column">
+      
+      <!-- PROFILE PHOTO CONTAINER -->
+      <!-- Editable size in CSS variables: --profile-photo-size -->
+      <!-- To use a local image, edit --profile-photo-url in the <style> section above -->
+      <div class="profile-photo" role="img" aria-label="Claudio Añasco Profile Photo"></div>
+
+      <!-- NAME -->
+      <h1 class="user-name">Claudio Añasco</h1>
+
+      <!-- POSITION / TITLE -->
+      <h2 class="user-position">Graphic Designer</h2>
+
+      <!-- DESCRIPTION / BIO (Supports multiple customizable paragraphs with adjustable gaps) -->
+      <div class="user-description">
+        <p>
+          Hi! I'm Claudio Añasco, a creative designer based in Bukidnon, Philippines, with several years of freelance and project-based experience.
+          I turn ideas, stories and concepts into purposeful visuals through Branding and Visual Design, Logo, Social Media Graphics and Apparel Design,
+          creating work that helps brands communicate clearly and build identity.
+        
+        <p>I am proficient in using Adobe Photoshop, Illustrator, and Canva. I have also basic skills in music and video editing 
+          using Capcut and FL Studio.
+        </p> 
+      </div>
+
+      <!-- SOCIAL / PORTFOLIO LINKS -->
+      <div class="social-links">
+        <!-- Replace href="#" with your actual URL links -->
+        <a href="https://www.instagram.com/d.ioooo_/" target="_blank" rel="noopener noreferrer" class="social-link">Instagram</a>
+        <a href="https://www.linkedin.com/in/claudio-a%C3%B1asco/" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
+        <a href="https://www.behance.net/gallery/254556333/PORTFOLIO" target="_blank" rel="noopener noreferrer" class="social-link">Portfolio</a>
+        <a href="resume/Resume Añasco Claudio - Graphic Design.pdf" target="_blank" rel="noopener noreferrer" class="social-link">Resume</a>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SECTION: "Get in touch" Container Button -->
+    <div class="right-column">
+      <!-- Clickable pill container with hover zoom and drop shadow -->
+      <button class="get-in-touch-btn" id="getInTouchBtn">
+        Get in touch
+      </button>
+    </div>
+
+  </main>
+
+  
+  <!-- SHARE POPUP MODAL -->
+  <div class="modal-overlay" id="shareModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Share</h3>
+        <button class="modal-close" id="closeShareModal">&times;</button>
+      </div>
+
+      <!-- Social Share Shortcuts -->
+      <div class="share-grid">
+        <!-- Messenger -->
+        <a href="#" id="shareMessenger" target="_blank" class="share-item">
+          <div class="share-icon-circle messenger-bg">
+            <i class="fa-brands fa-facebook-messenger"></i>
+          </div>
+          <span>Messenger</span>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://instagram.com" target="_blank" class="share-item">
+          <div class="share-icon-circle instagram-bg">
+            <i class="fa-brands fa-instagram"></i>
+          </div>
+          <span>Instagram</span>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="#" id="shareLinkedIn" target="_blank" class="share-item">
+          <div class="share-icon-circle linkedin-bg">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </div>
+          <span>LinkedIn</span>
+        </a>
+
+        <!-- Email -->
+        <a href="#" id="shareEmail" class="share-item">
+          <div class="share-icon-circle email-bg">
+            <i class="fa-regular fa-envelope"></i>
+          </div>
+          <span>Email</span>
+        </a>
+      </div>
+
+      <!-- Copy Link Bar -->
+      <div class="copy-link-bar">
+        <input type="text" id="copyLinkInput" class="copy-link-input" readonly value="" />
+        <button class="copy-btn" id="copyLinkBtn">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- "GET IN TOUCH" INTERACTIVE MODAL -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Get in Touch</h3>
+        <button class="modal-close" id="closeContactModal">&times;</button>
+      </div>
+
+      <div class="contact-options">
+        <!-- Email Option -->
+        <a href="mailto:claudioanasco507@gmail.com" class="contact-item">
+          <i class="fa-regular fa-envelope"></i>
+          <span>Send an Email</span>
+        </a>
+
+        <!-- Phone / WhatsApp Option -->
+        <a href="https://wa.me/d.ioooo_" target="_blank" class="contact-item">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>WhatsApp Message</span>
+        </a>
+
+        <!-- Direct Call -->
+        <a href="tel:+639626699257" class="contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <span>Call Directly</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="copyToast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span>Link copied to clipboard!</span>
+  </div>
+
+  <script>
+    
+    // Set current page URL inside the Share Copy Link input box
+    const currentUrl = window.location.href;
+    document.getElementById('copyLinkInput').value = currentUrl;
+
+    // Elements
+    const shareBtn = document.getElementById('shareBtn');
+    const shareModal = document.getElementById('shareModal');
+    const closeShareModal = document.getElementById('closeShareModal');
+    
+    const getInTouchBtn = document.getElementById('getInTouchBtn');
+    const contactModal = document.getElementById('contactModal');
+    const closeContactModal = document.getElementById('closeContactModal');
+
+    const copyLinkBtn = document.getElementById('copyLinkBtn');
+    const copyLinkInput = document.getElementById('copyLinkInput');
+    const copyToast = document.getElementById('copyToast');
+
+    // Dynamic Share Links Configuration
+    document.getElementById('shareMessenger').href = `fb-messenger://share/?link=${encodeURIComponent(currentUrl)}`;
+    document.getElementById('shareLinkedIn').href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
+    document.getElementById('shareEmail').href = `mailto:?subject=Digital Business Card - Claudio Añasco&body=Check out this digital business card: ${encodeURIComponent(currentUrl)}`;
+
+    // Open Share Modal (with Web Share API native fallback if available on mobile)
+    shareBtn.addEventListener('click', () => {
+      if (navigator.share && /Android|iPhone|iPad/i.test(navigator.userAgent)) {
+        navigator.share({
+          title: 'Claudio Añasco - Digital Business Card',
+          text: 'Check out Claudio Añasco\'s digital business card.',
+          url: currentUrl,
+        }).catch(() => {
+          // Fallback to custom modal if user cancels or native share fails
+          shareModal.classList.add('active');
+        });
+      } else {
+        shareModal.classList.add('active');
+      }
+    });
+
+    // Close Share Modal
+    closeShareModal.addEventListener('click', () => {
+      shareModal.classList.remove('active');
+    });
+
+    // Open "Get in Touch" Modal
+    getInTouchBtn.addEventListener('click', () => {
+      contactModal.classList.add('active');
+    });
+
+    // Close "Get in Touch" Modal
+    closeContactModal.addEventListener('click', () => {
+      contactModal.classList.remove('active');
+    });
+
+    // Close Modals when clicking outside card
+    [shareModal, contactModal].forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    });
+
+    // Copy Link to Clipboard Functionality
+    copyLinkBtn.addEventListener('click', () => {
+      copyLinkInput.select();
+      copyLinkInput.setSelectionRange(0, 99999); // For mobile devices
+
+      try {
+        // Safe clipboard exec for frame/GitHub environments
+        document.execCommand('copy');
+        showToast();
+      } catch (err) {
+        navigator.clipboard.writeText(currentUrl).then(() => {
+          showToast();
+        });
+      }
+    });
+
+    // Show Toast Notification
+    function showToast() {
+      copyToast.classList.add('show');
+      setTimeout(() => {
+        copyToast.classList.remove('show');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
